@@ -3,13 +3,10 @@ import csv
 MY_FILE = "../data/sample_sfpd_incident_all.csv"
 
 def parse(raw_file, delimiter):
-	"""Parses a raw CSV file to a JSON-like object.
-		As well as creates a parsed_data.txt file."""
+	"""Parses a raw CSV file to a JSON-like object."""
 
 	# Open CSV file
 	opened_file = open(raw_file)
-	# Open file to be saved
-	saved_file = open("parsed_data.txt", "w")
 
 	# Read CSV file
 	csv_data = csv.reader(opened_file, delimiter=delimiter)
@@ -24,12 +21,10 @@ def parse(raw_file, delimiter):
 	# Iterate over each row of the csv file, zip together field -> value
 	for row in csv_data:
 		parsed_data.append(dict(zip(fields, row)))
-		saved_file.write(str(zip(fields, row)))
 
 	# Close CSV file
 	opened_file.close()
 	# Close saved file
-	saved_file.close()
 
 	return parsed_data
 
